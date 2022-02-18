@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace YourSky
 {
-    public class Program
+    public class YourSky
     {
         public static void Main(string[] args)
         {

@@ -2,7 +2,7 @@ using System;
 
 namespace YourSky
 {
-    public class WeatherForecast
+    public class YourSkySearch
     {
         public DateTime Date { get; set; }
 
