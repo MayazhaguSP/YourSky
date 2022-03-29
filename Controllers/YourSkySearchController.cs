@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using YourSky.Models;
 
 namespace YourSky.Controllers
 {
@@ -11,10 +13,6 @@ namespace YourSky.Controllers
     [Route("[controller]")]
     public class YourSkySearchController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         private readonly ILogger<YourSkySearchController> _logger;
 
@@ -24,16 +22,20 @@ namespace YourSky.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<YourSkySearch> Get()
+        public async Task<IEnumerable<YourSkySearch>> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new YourSkySearch
+            try
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                List<YourSkySearch> list = new List<YourSkySearch>();
+                SearchContext context = HttpContext.RequestServices.GetService(typeof(SearchContext)) as SearchContext;
+
+                list = context.GetAllAlbums();
+                return list.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
