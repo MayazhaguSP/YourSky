@@ -9,6 +9,9 @@ namespace YourSky.Models
     {
         private SearchContext context;
         public string course { get; set; }
-        public int courseid { get; set; }
+        public string country { get; set; }
+        public string intakes { get; set; }
+        public int pageno { get; set; }
+        public int pagesize { get; set; }
     }
 }
