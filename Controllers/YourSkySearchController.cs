@@ -22,14 +22,14 @@ namespace YourSky.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<YourSkySearch>> Get(SearchFilter Search)
+        public async Task<IEnumerable<YourSkySearch>> Get()
         {
             try
             {
                 List<YourSkySearch> list = new List<YourSkySearch>();
                 SearchContext context = HttpContext.RequestServices.GetService(typeof(SearchContext)) as SearchContext;
 
-                list = context.GetAllAlbums(Search);
+                list = context.GetAllAlbums();
                 return list.ToArray();
             }
             catch (Exception ex)

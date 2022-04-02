@@ -19,7 +19,7 @@ namespace YourSky.Models
         {
             return new MySqlConnection(ConnectionString);
         }
-        public List<YourSkySearch> GetAllAlbums(SearchFilter Search)
+        public List<YourSkySearch> GetAllAlbums()
         {
             List<YourSkySearch> list = new List<YourSkySearch>();
             using (MySqlConnection con = GetConnection())
@@ -27,13 +27,13 @@ namespace YourSky.Models
                 using (MySqlCommand cmd = new MySqlCommand("YourskySearch", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@course", Search.course);
-                    cmd.Parameters.AddWithValue("@country", Search.country);
-                    cmd.Parameters.AddWithValue("@intakes", Search.intakes);
+                    cmd.Parameters.AddWithValue("@course", "");
+                    cmd.Parameters.AddWithValue("@country", "");
+                    cmd.Parameters.AddWithValue("@intakes", "");
                     cmd.Parameters.AddWithValue("@SortColumn", "");
                     cmd.Parameters.AddWithValue("@SortType", "ASC");
-                    cmd.Parameters.AddWithValue("@PageNo", Search.pageno);
-                    cmd.Parameters.AddWithValue("@PageSize", Search.pagesize);
+                    cmd.Parameters.AddWithValue("@PageNo", "");
+                    cmd.Parameters.AddWithValue("@PageSize", "");
                     using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
                     {
                         DataTable dt = new DataTable();
