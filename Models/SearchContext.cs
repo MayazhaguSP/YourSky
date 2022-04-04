@@ -1,9 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace YourSky.Models
 {
@@ -19,7 +17,7 @@ namespace YourSky.Models
         {
             return new MySqlConnection(ConnectionString);
         }
-        public List<YourSkySearch> GetAllAlbums()
+        public List<YourSkySearch> GetAllSearchFilter(SearchFilter data)
         {
             List<YourSkySearch> list = new List<YourSkySearch>();
             using (MySqlConnection con = GetConnection())
@@ -27,13 +25,13 @@ namespace YourSky.Models
                 using (MySqlCommand cmd = new MySqlCommand("YourskySearch", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@course", "");
-                    cmd.Parameters.AddWithValue("@country", "");
-                    cmd.Parameters.AddWithValue("@intakes", "");
+                    cmd.Parameters.AddWithValue("@course", data.course);
+                    cmd.Parameters.AddWithValue("@country", data.country);
+                    cmd.Parameters.AddWithValue("@intakes", data.intakes);
                     cmd.Parameters.AddWithValue("@SortColumn", "");
                     cmd.Parameters.AddWithValue("@SortType", "ASC");
-                    cmd.Parameters.AddWithValue("@PageNo", "");
-                    cmd.Parameters.AddWithValue("@PageSize", "");
+                    cmd.Parameters.AddWithValue("@PageNo", data.pageno);
+                    cmd.Parameters.AddWithValue("@PageSize", data.pagesize);
                     using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
                     {
                         DataTable dt = new DataTable();
@@ -167,6 +165,106 @@ namespace YourSky.Models
                  }
              } */
             //return list;
+        }
+        public List<YourSkySearch> GetUniversity()
+        {
+            List<YourSkySearch> list = new List<YourSkySearch>();
+            using (MySqlConnection con = GetConnection())
+            {
+                using (MySqlCommand cmd = new MySqlCommand("YourskyUniversity", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            list.Add(new YourSkySearch()
+                            {
+                                collegeid = dt.Rows[i]["collegeid"].ToString(),
+                                college = dt.Rows[i]["college"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+        public List<YourSkySearch> GetLocation()
+        {
+            List<YourSkySearch> list = new List<YourSkySearch>();
+            using (MySqlConnection con = GetConnection())
+            {
+                using (MySqlCommand cmd = new MySqlCommand("YourskyLocation", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            list.Add(new YourSkySearch()
+                            {
+                                countryid = dt.Rows[i]["id"].ToString(),
+                                country = dt.Rows[i]["name"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+        public List<YourSkySearch> GetIntakes()
+        {
+            List<YourSkySearch> list = new List<YourSkySearch>();
+            using (MySqlConnection con = GetConnection())
+            {
+                using (MySqlCommand cmd = new MySqlCommand("YourskyIntakes", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            list.Add(new YourSkySearch()
+                            {
+                                Intake_Intakeid = dt.Rows[i]["intakeid"].ToString(),
+                                Intake_Intake = dt.Rows[i]["intake"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+        public List<YourSkySearch> GetEducationlevel()
+        {
+            List<YourSkySearch> list = new List<YourSkySearch>();
+            using (MySqlConnection con = GetConnection())
+            {
+                using (MySqlCommand cmd = new MySqlCommand("YourskyEducationlevel", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            list.Add(new YourSkySearch()
+                            {
+                                courseid = int.Parse(dt.Rows[i]["courseid"].ToString()),
+                                course = dt.Rows[i]["course"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
         }
     }
 }

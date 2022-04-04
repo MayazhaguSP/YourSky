@@ -1,5 +1,3 @@
-using System;
-
 namespace YourSky
 {
     public class YourSkySearch
@@ -26,6 +24,7 @@ namespace YourSky
         public string clg_commission { get; set; }
 
         public string collegeid { get; set; }
+        public string college { get; set; }
         public string college_address { get; set; }
 
         public string college_url { get; set; }
