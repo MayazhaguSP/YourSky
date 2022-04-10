@@ -166,9 +166,9 @@ namespace YourSky.Models
              } */
             //return list;
         }
-        public List<YourSkySearch> GetUniversity()
+        public List<YourskyUniversity> GetUniversity()
         {
-            List<YourSkySearch> list = new List<YourSkySearch>();
+            List<YourskyUniversity> list = new List<YourskyUniversity>();
             using (MySqlConnection con = GetConnection())
             {
                 using (MySqlCommand cmd = new MySqlCommand("YourskyUniversity", con))
@@ -180,7 +180,7 @@ namespace YourSky.Models
                         sda.Fill(dt);
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            list.Add(new YourSkySearch()
+                            list.Add(new YourskyUniversity()
                             {
                                 collegeid = dt.Rows[i]["collegeid"].ToString(),
                                 college = dt.Rows[i]["college"].ToString()
@@ -191,9 +191,9 @@ namespace YourSky.Models
             }
             return list;
         }
-        public List<YourSkySearch> GetLocation()
+        public List<YourskyLocation> GetLocation()
         {
-            List<YourSkySearch> list = new List<YourSkySearch>();
+            List<YourskyLocation> list = new List<YourskyLocation>();
             using (MySqlConnection con = GetConnection())
             {
                 using (MySqlCommand cmd = new MySqlCommand("YourskyLocation", con))
@@ -205,7 +205,7 @@ namespace YourSky.Models
                         sda.Fill(dt);
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            list.Add(new YourSkySearch()
+                            list.Add(new YourskyLocation()
                             {
                                 countryid = dt.Rows[i]["id"].ToString(),
                                 country = dt.Rows[i]["name"].ToString()
@@ -216,9 +216,9 @@ namespace YourSky.Models
             }
             return list;
         }
-        public List<YourSkySearch> GetIntakes()
+        public List<YourskyIntakes> GetIntakes()
         {
-            List<YourSkySearch> list = new List<YourSkySearch>();
+            List<YourskyIntakes> list = new List<YourskyIntakes>();
             using (MySqlConnection con = GetConnection())
             {
                 using (MySqlCommand cmd = new MySqlCommand("YourskyIntakes", con))
@@ -230,10 +230,10 @@ namespace YourSky.Models
                         sda.Fill(dt);
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            list.Add(new YourSkySearch()
+                            list.Add(new YourskyIntakes()
                             {
-                                Intake_Intakeid = dt.Rows[i]["intakeid"].ToString(),
-                                Intake_Intake = dt.Rows[i]["intake"].ToString()
+                                intakeid = dt.Rows[i]["intakeid"].ToString(),
+                                intakes = dt.Rows[i]["intake"].ToString()
                             });
                         }
                     }
@@ -241,9 +241,9 @@ namespace YourSky.Models
             }
             return list;
         }
-        public List<YourSkySearch> GetEducationlevel()
+        public List<YourskyEducationlevel> GetEducationlevel()
         {
-            List<YourSkySearch> list = new List<YourSkySearch>();
+            List<YourskyEducationlevel> list = new List<YourskyEducationlevel>();
             using (MySqlConnection con = GetConnection())
             {
                 using (MySqlCommand cmd = new MySqlCommand("YourskyEducationlevel", con))
@@ -255,7 +255,7 @@ namespace YourSky.Models
                         sda.Fill(dt);
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            list.Add(new YourSkySearch()
+                            list.Add(new YourskyEducationlevel()
                             {
                                 courseid = int.Parse(dt.Rows[i]["courseid"].ToString()),
                                 course = dt.Rows[i]["course"].ToString()

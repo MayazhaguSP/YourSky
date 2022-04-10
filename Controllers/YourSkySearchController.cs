@@ -39,11 +39,11 @@ namespace YourSky.Controllers
 
         [HttpGet]
         [Route("location")]
-        public async Task<IEnumerable<YourSkySearch>> GetLocation()
+        public async Task<IEnumerable<YourskyLocation>> GetLocation()
         {
             try
             {
-                List<YourSkySearch> list = new List<YourSkySearch>();
+                List<YourskyLocation> list = new List<YourskyLocation>();
                 SearchContext context = HttpContext.RequestServices.GetService(typeof(SearchContext)) as SearchContext;
 
                 list = context.GetLocation();
@@ -57,11 +57,11 @@ namespace YourSky.Controllers
         }
         [HttpGet]
         [Route("university")]
-        public async Task<IEnumerable<YourSkySearch>> GetUniversity()
+        public async Task<IEnumerable<YourskyUniversity>> GetUniversity()
         {
             try
             {
-                List<YourSkySearch> list = new List<YourSkySearch>();
+                List<YourskyUniversity> list = new List<YourskyUniversity>();
                 SearchContext context = HttpContext.RequestServices.GetService(typeof(SearchContext)) as SearchContext;
 
                 list = context.GetUniversity();
@@ -74,11 +74,11 @@ namespace YourSky.Controllers
         }
         [HttpGet]
         [Route("intakes")]
-        public async Task<IEnumerable<YourSkySearch>> GetIntakes()
+        public async Task<IEnumerable<YourskyIntakes>> GetIntakes()
         {
             try
             {
-                List<YourSkySearch> list = new List<YourSkySearch>();
+                List<YourskyIntakes> list = new List<YourskyIntakes>();
                 SearchContext context = HttpContext.RequestServices.GetService(typeof(SearchContext)) as SearchContext;
 
                 list = context.GetIntakes();
@@ -91,11 +91,11 @@ namespace YourSky.Controllers
         }
         [HttpGet]
         [Route("educationlevel")]
-        public async Task<IEnumerable<YourSkySearch>> GetEducationlevel()
+        public async Task<IEnumerable<YourskyEducationlevel>> GetEducationlevel()
         {
             try
             {
-                List<YourSkySearch> list = new List<YourSkySearch>();
+                List<YourskyEducationlevel> list = new List<YourskyEducationlevel>();
                 SearchContext context = HttpContext.RequestServices.GetService(typeof(SearchContext)) as SearchContext;
 
                 list = context.GetEducationlevel();
